@@ -1,0 +1,249 @@
+/* resources/css/components/buttons.css */
+
+/* Base Button — SpaceX buttons are full pill shapes,
+   solid fill, no border, snappy hover transition */
+.btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    transition: all 0.35s var(--ease-snap, cubic-bezier(0.65, 0, 0.35, 1));
+    cursor: pointer;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.btn:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Button Variants */
+
+/* Primary solid pill — white fill, black text. This is
+   the default call-to-action style on spacex.com */
+.btn-filled {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+}
+
+.btn-filled:hover {
+    background: rgba(255, 255, 255, 0.85);
+    transform: translateY(-1px);
+}
+
+.btn-filled:active {
+    transform: translateY(0);
+}
+
+/* Outline pill — thin white border, fills solid on hover.
+   Used for secondary actions next to a primary button */
+.btn-outline {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    overflow: hidden;
+}
+
+.btn-outline::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    border-radius: 9999px;
+    transform: scale(0);
+    transition: transform 0.4s var(--ease-snap, cubic-bezier(0.65, 0, 0.35, 1));
+    z-index: 0;
+}
+
+.btn-outline:hover::before {
+    transform: scale(1);
+}
+
+.btn-outline:hover {
+    color: #000000;
+    border-color: #ffffff;
+}
+
+.btn-outline span,
+.btn-outline svg {
+    position: relative;
+    z-index: 1;
+}
+
+/* Ghost pill — near-invisible, brightens on hover.
+   Used for tertiary/nav-adjacent actions */
+.btn-ghost {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid transparent;
+}
+
+.btn-ghost:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Text link — no pill shape, underline-style affordance only */
+.btn-text {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: none;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn-text:hover {
+    color: #ffffff;
+}
+
+/* Button Sizes — slightly taller than before since pill
+   shapes read better with a bit more vertical padding */
+.btn-sm {
+    padding: 0.625rem 1.5rem;
+    font-size: 0.75rem;
+}
+
+.btn-md {
+    padding: 0.875rem 2.25rem;
+    font-size: 0.8125rem;
+}
+
+.btn-lg {
+    padding: 1.0625rem 2.75rem;
+    font-size: 0.875rem;
+}
+
+.btn-xl {
+    padding: 1.25rem 3.25rem;
+    font-size: 0.9375rem;
+}
+
+/* Full Width */
+.btn-full {
+    width: 100%;
+}
+
+/* Icon Button — always a perfect circle */
+.btn-icon {
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+.btn-icon-sm {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.btn-icon-lg {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+/* Glow Button */
+.btn-glow {
+    position: relative;
+}
+
+.btn-glow::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 9999px;
+    background: radial-gradient(
+        600px circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+        rgba(255, 255, 255, 0.15),
+        transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.btn-glow:hover::after {
+    opacity: 1;
+}
+
+/* Arrow Hover Effect */
+.btn-arrow svg {
+    transition: transform 0.3s var(--ease-snap, cubic-bezier(0.65, 0, 0.35, 1));
+}
+
+.btn-arrow:hover svg.arrow-right {
+    transform: translateX(4px);
+}
+
+.btn-arrow:hover svg.arrow-left {
+    transform: translateX(-4px);
+}
+
+/* Loading State */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn-loading .btn-text-content {
+    opacity: 0;
+}
+
+.btn-loading .btn-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spinSlow 0.8s linear infinite;
+}
+
+/* Button Group */
+.btn-group {
+    display: inline-flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-group-center {
+    justify-content: center;
+}
+
+.btn-group-end {
+    justify-content: flex-end;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-group .btn {
+        width: 100%;
+    }
+
+    .btn-responsive {
+        width: 100%;
+    }
+}

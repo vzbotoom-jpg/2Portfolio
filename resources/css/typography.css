@@ -1,0 +1,353 @@
+/* resources/css/typography.css */
+
+/* Note: font-face declarations moved to head.blade.php and are
+   emitted conditionally if files exist in public/fonts to avoid
+   404s during development when fonts are not present. */
+
+/* Typography Base */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Headings — SpaceX headings are condensed, heavy, and
+   almost always set in uppercase with tight line-height */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'D-DIN', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+}
+
+/* Display Text — the oversized hero/section titles.
+   Sizes pushed up significantly vs. a typical portfolio
+   scale to match SpaceX's billboard-style headlines */
+.display-1 {
+    font-family: 'D-DIN', 'Inter', sans-serif;
+    font-size: clamp(3.5rem, 11vw, 13rem);
+    font-weight: 700;
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+}
+
+.display-2 {
+    font-family: 'D-DIN', 'Inter', sans-serif;
+    font-size: clamp(2.75rem, 8vw, 9rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+}
+
+.display-3 {
+    font-family: 'D-DIN', 'Inter', sans-serif;
+    font-size: clamp(2rem, 5vw, 6rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+}
+
+/* Heading Sizes */
+.heading-xl {
+    font-size: clamp(2.25rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.heading-lg {
+    font-size: clamp(1.875rem, 4.5vw, 4.25rem);
+    font-weight: 700;
+    line-height: 1.05;
+    text-transform: uppercase;
+}
+
+.heading-md {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.heading-sm {
+    font-size: clamp(1.25rem, 2vw, 2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    text-transform: uppercase;
+}
+
+/* Body Text — kept calm and lowercase to contrast
+   against the loud, all-caps headlines */
+.body-xl {
+    font-size: clamp(1.125rem, 1.5vw, 1.25rem);
+    line-height: 1.7;
+    text-transform: none;
+}
+
+.body-lg {
+    font-size: 1.125rem;
+    line-height: 1.7;
+}
+
+.body-md {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.body-sm {
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.body-xs {
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+/* Label / Eyebrow — small uppercase tag above headings,
+   e.g. "MISSION" / "STARSHIP" / "DRAGON" */
+.label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+}
+
+.label-sm {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+}
+
+.label-lg {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+/* Tracking (Letter Spacing) */
+.tracking-tight {
+    letter-spacing: -0.02em;
+}
+
+.tracking-normal {
+    letter-spacing: 0;
+}
+
+.tracking-wide {
+    letter-spacing: 0.05em;
+}
+
+.tracking-wider {
+    letter-spacing: 0.1em;
+}
+
+.tracking-widest {
+    letter-spacing: 0.18em;
+}
+
+.tracking-super {
+    letter-spacing: 0.28em;
+}
+
+.tracking-ultra {
+    letter-spacing: 0.45em;
+}
+
+/* Font Weights */
+.font-thin { font-weight: 100; }
+.font-extralight { font-weight: 200; }
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.font-black { font-weight: 900; }
+
+/* Line Heights */
+.leading-none { line-height: 1; }
+.leading-tight { line-height: 1.05; }
+.leading-snug { line-height: 1.15; }
+.leading-normal { line-height: 1.5; }
+.leading-relaxed { line-height: 1.7; }
+.leading-loose { line-height: 2; }
+
+/* Text Transforms */
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.normal-case { text-transform: none; }
+
+/* Use this on body copy nested inside a heading-styled
+   wrapper to override the inherited uppercase transform */
+.text-body-case {
+    text-transform: none;
+}
+
+/* Text Decoration */
+.underline-offset-4 {
+    text-underline-offset: 4px;
+}
+
+/* Text Gradient */
+.text-gradient-white {
+    background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-gradient-gray {
+    background: linear-gradient(to right, #ffffff, #9a9a9a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Text Stroke */
+.text-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: transparent;
+}
+
+.text-stroke-thin {
+    -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.2);
+    color: transparent;
+}
+
+/* Text Glow */
+.text-glow {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.text-glow-strong {
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+/* Prose / Article Styles */
+.prose {
+    max-width: 65ch;
+}
+
+.prose h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+}
+
+.prose h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
+}
+
+.prose h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.prose p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: none;
+}
+
+.prose a {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: opacity 0.3s ease;
+}
+
+.prose a:hover {
+    opacity: 0.7;
+}
+
+.prose ul, .prose ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.prose li {
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: none;
+}
+
+.prose blockquote {
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.prose code {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.875em;
+    font-family: 'Courier New', monospace;
+}
+
+.prose pre {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 2rem 0;
+}
+
+.prose pre code {
+    background: none;
+    padding: 0;
+}
+
+.prose img {
+    border-radius: 4px;
+    margin: 2rem 0;
+}
+
+.prose hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 3rem 0;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    .prose h1 {
+        font-size: 2rem;
+    }
+
+    .prose h2 {
+        font-size: 1.5rem;
+    }
+
+    .prose h3 {
+        font-size: 1.25rem;
+    }
+}

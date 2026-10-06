@@ -1,0 +1,326 @@
+/* resources/css/app.css */
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+@source '../js/**/*.js';
+
+@theme {
+    /* ============================================ */
+    /* FONTS — SpaceX uses a condensed, heavy sans   */
+    /* for headings and a clean sans for body text   */
+    /* ============================================ */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'D-DIN', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+    /* ============================================ */
+    /* COLORS — pure black/white, almost no greys    */
+    /* used anywhere except as subtle hairlines       */
+    /* ============================================ */
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-gray-950: #050505;
+    --color-gray-900: #0d0d0d;
+    --color-gray-800: #161616;
+    --color-gray-700: #242424;
+    --color-gray-600: #3a3a3a;
+    --color-gray-500: #5a5a5a;
+    --color-gray-400: #7a7a7a;
+    --color-gray-300: #9a9a9a;
+    --color-gray-200: #bababa;
+    --color-gray-100: #dadada;
+    --color-gray-50: #f0f0f0;
+
+    /* Single accent kept neutral so it never competes
+       with the black/white identity — used sparingly
+       for live/status indicators only */
+    --color-accent: #00a862;
+    --color-success: #00d27a;
+
+    /* ============================================ */
+    /* SPACING — SpaceX sections run edge-to-edge,    */
+    /* generous vertical rhythm, tight side padding   */
+    /* ============================================ */
+    --spacing-section: 7rem;
+    --spacing-section-lg: 10rem;
+    --spacing-edge: 1.5rem;
+    --spacing-edge-lg: 2.5rem;
+
+    /* ============================================ */
+    /* TRACKING — wide letter-spacing on all caps     */
+    /* labels and nav items, tight on display type    */
+    /* ============================================ */
+    --tracking-display: -0.01em;
+    --tracking-widest: 0.18em;
+    --tracking-super: 0.28em;
+    --tracking-ultra: 0.45em;
+
+    /* ============================================ */
+    /* TYPE SCALE — oversized, condensed headlines    */
+    /* ============================================ */
+    --font-size-xxs: 0.6875rem;
+    --font-size-display-1: clamp(3.5rem, 11vw, 13rem);
+    --font-size-display-2: clamp(2.75rem, 8vw, 9rem);
+    --font-size-display-3: clamp(2rem, 5vw, 6rem);
+    --font-size-eyebrow: 0.75rem;
+
+    /* ============================================ */
+    /* ANIMATION TOKENS                               */
+    /* ============================================ */
+    --animate-fade-in: fadeIn 1s ease-out forwards;
+    --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
+    --animate-fade-in-down: fadeInDown 0.8s ease-out forwards;
+    --animate-fade-in-left: fadeInLeft 0.8s ease-out forwards;
+    --animate-fade-in-right: fadeInRight 0.8s ease-out forwards;
+    --animate-scale-in: scaleIn 0.6s ease-out forwards;
+    --animate-bounce-slow: bounceSlow 2s ease-in-out infinite;
+    --animate-pulse-slow: pulseSlow 3s ease-in-out infinite;
+    --animate-spin-slow: spin 8s linear infinite;
+    --animate-shimmer: shimmer 2s infinite;
+    --animate-float: float 6s ease-in-out infinite;
+    --animate-glow: glow 2s ease-in-out infinite;
+    --animate-reveal-line: revealLine 0.8s ease-out forwards;
+
+    /* "Snap" easing — fast start, firm stop. This is the
+       signature motion feel of spacex.com transitions,
+       distinct from the slower ease-out-expo we used before */
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-in-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-snap: cubic-bezier(0.65, 0, 0.35, 1);
+
+    /* ============================================ */
+    /* SHADOWS / EFFECTS                              */
+    /* ============================================ */
+    --shadow-glow: 0 0 40px rgba(255, 255, 255, 0.1);
+    --shadow-glow-lg: 0 0 80px rgba(255, 255, 255, 0.15);
+    --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+    --background-image-grid-pattern: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    --background-image-dot-pattern: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+
+    --drop-shadow-glow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bounceSlow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulseSlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+    50% { box-shadow: 0 0 40px rgba(255,255,255,0.2); }
+}
+
+@keyframes revealLine {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* Base Styles */
+@layer base {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        background-color: #000000;
+        color: #ffffff;
+        font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    }
+
+    ::selection {
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #000000;
+    }
+
+    :focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 2px;
+    }
+
+    @media (min-width: 768px) {
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555555;
+        }
+    }
+}
+
+/* Component Styles */
+@layer components {
+    /* SpaceX runs content almost edge-to-edge — much
+       tighter side padding than a typical "container" */
+    .container-fluid {
+        width: 100%;
+        max-width: 1800px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: var(--spacing-edge);
+        padding-right: var(--spacing-edge);
+    }
+
+    @media (min-width: 1024px) {
+        .container-fluid {
+            padding-left: var(--spacing-edge-lg);
+            padding-right: var(--spacing-edge-lg);
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .container-fluid {
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+    }
+
+    /* True edge-to-edge wrapper for hero / full-bleed media sections */
+    .container-edge {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .text-gradient {
+        background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.4));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .text-stroke {
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+        color: transparent;
+    }
+
+    .glass {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+
+    .section-py {
+        padding-top: var(--spacing-section);
+        padding-bottom: var(--spacing-section);
+    }
+
+    @media (min-width: 1024px) {
+        .section-py {
+            padding-top: var(--spacing-section-lg);
+            padding-bottom: var(--spacing-section-lg);
+        }
+    }
+
+    /* Thin hairline divider — SpaceX uses 1px white/10
+       lines instead of visible borders almost everywhere */
+    .hairline {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Small uppercase eyebrow label used above headings,
+       e.g. "STARSHIP" above a big title */
+    .eyebrow {
+        font-size: var(--font-size-eyebrow);
+        letter-spacing: var(--tracking-super);
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 600;
+    }
+}
+
+/* Utility Styles */
+@layer utilities {
+    .animation-delay-100 { animation-delay: 0.1s; }
+    .animation-delay-200 { animation-delay: 0.2s; }
+    .animation-delay-300 { animation-delay: 0.3s; }
+    .animation-delay-400 { animation-delay: 0.4s; }
+    .animation-delay-500 { animation-delay: 0.5s; }
+    .animation-delay-600 { animation-delay: 0.6s; }
+    .animation-delay-700 { animation-delay: 0.7s; }
+    .animation-delay-800 { animation-delay: 0.8s; }
+    .animation-delay-900 { animation-delay: 0.9s; }
+    .animation-delay-1000 { animation-delay: 1s; }
+
+    .no-tap-highlight {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

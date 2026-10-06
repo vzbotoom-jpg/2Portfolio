@@ -1,0 +1,309 @@
+/* resources/css/components/cards.css */
+
+/* Base Card — SpaceX cards rely on the photo itself for
+   visual interest; the "frame" is almost invisible until
+   hovered, just a hairline brightening */
+.card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 4px;
+    transition: all 0.45s var(--ease-snap, cubic-bezier(0.65, 0, 0.35, 1));
+    overflow: hidden;
+}
+
+.card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Card Variants */
+.card-glass {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-gradient {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.02), transparent);
+}
+
+.card-bordered {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-elevated {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Project / Mission Card — full-bleed photo, caption sits
+   directly on the image with a soft gradient, no border box */
+.project-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.project-card img {
+    transition: transform 0.8s var(--ease-snap, cubic-bezier(0.65, 0, 0.35, 1)), opacity 0.7s ease;
+}
+
+.project-card:hover img {
+    transform: scale(1.06);
+    opacity: 0.7;
+}
+
+.project-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.25) 55%, transparent 100%);
+    opacity: 0.75;
+    transition: opacity 0.5s ease;
+}
+
+.project-card:hover .project-card-overlay {
+    opacity: 0.9;
+}
+
+.project-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    transform: translateY(8px);
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-card-content {
+    transform: translateY(0);
+}
+
+.project-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.project-card-category {
+    font-size: 0.6875rem;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* No inset frame by default — SpaceX rarely puts a visible
+   border on top of the photo itself. Kept as opt-in only. */
+.project-card-border {
+    position: absolute;
+    inset: 1rem;
+    border: 1px solid transparent;
+    transition: border-color 0.5s ease;
+    pointer-events: none;
+}
+
+.project-card:hover .project-card-border {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Glow Card */
+.glow-card {
+    position: relative;
+}
+
+.glow-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        800px circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+        rgba(255, 255, 255, 0.06),
+        transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.glow-card:hover::before {
+    opacity: 1;
+}
+
+/* Service Card — icon de-emphasized, title carries the weight */
+.service-card {
+    padding: 2.5rem;
+    text-align: left;
+}
+
+.service-card-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.45);
+    transition: all 0.5s var(--ease-snap, cubic-bezier(0.65, 0, 0.35, 1));
+}
+
+.service-card:hover .service-card-icon {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.08);
+}
+
+.service-card-title {
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.service-card-description {
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    text-transform: none;
+}
+
+.service-card-bottom-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+}
+
+.service-card:hover .service-card-bottom-line {
+    transform: scaleX(1);
+}
+
+/* Testimonial Card */
+.testimonial-card {
+    padding: 2.5rem;
+}
+
+.testimonial-card-quote {
+    font-size: 2.5rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.05);
+    margin-bottom: 1.5rem;
+    transition: color 0.5s ease;
+}
+
+.testimonial-card:hover .testimonial-card-quote {
+    color: rgba(255, 255, 255, 0.1);
+}
+
+.testimonial-card-content {
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    transition: color 0.5s ease;
+    text-transform: none;
+}
+
+.testimonial-card:hover .testimonial-card-content {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.testimonial-card-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.testimonial-card-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Stat Card — numbers oversized and condensed, exactly
+   like SpaceX's mission stat counters */
+.stat-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.stat-card-number {
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    transition: all 0.5s ease;
+}
+
+.stat-card:hover .stat-card-number {
+    -webkit-text-fill-color: #ffffff;
+}
+
+.stat-card-label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.35);
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color 0.5s ease;
+}
+
+.stat-card:hover .stat-card-label {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.stat-card-line {
+    width: 2rem;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    margin: 1rem auto 0;
+    transition: all 0.5s ease;
+}
+
+.stat-card:hover .stat-card-line {
+    width: 3rem;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .project-card-content {
+        padding: 1.5rem;
+    }
+
+    .project-card-title {
+        font-size: 1.25rem;
+    }
+
+    .service-card {
+        padding: 2rem;
+    }
+
+    .testimonial-card {
+        padding: 2rem;
+    }
+}

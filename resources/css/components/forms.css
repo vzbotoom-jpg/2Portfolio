@@ -1,0 +1,335 @@
+/* resources/css/components/forms.css */
+
+/* Base Form Styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 0.625rem;
+    text-transform: uppercase;
+}
+
+/* Input Styles — SpaceX forms use filled pill/rounded
+   fields rather than underline-only minimal inputs */
+.form-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    padding: 0.875rem 1.25rem;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.form-input:focus {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.form-input:hover:not(:focus) {
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* Sharp-cornered variant kept for places that need a
+   non-pill rectangular field (e.g. dense data tables) */
+.form-input-bordered {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 0.875rem 1rem;
+}
+
+.form-input-bordered:focus {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Textarea — keeps soft rounded corners (not a full pill,
+   since pill shapes look odd on multi-line fields) */
+.form-textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+    resize: vertical;
+    min-height: 150px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    outline: none;
+}
+
+.form-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.form-textarea:focus {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Select */
+.form-select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    padding: 0.875rem 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='rgba(255,255,255,0.3)' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.25rem center;
+    padding-right: 2.75rem;
+}
+
+.form-select option {
+    background: #000000;
+    color: #ffffff;
+}
+
+.form-select:focus {
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Checkbox */
+.form-checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+.form-checkbox input[type="checkbox"] {
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 0.25rem;
+    background: transparent;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.form-checkbox input[type="checkbox"]:checked {
+    background: #ffffff;
+    border-color: #ffffff;
+}
+
+.form-checkbox input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 4px;
+    height: 8px;
+    border: solid #000000;
+    border-width: 0 2px 2px 0;
+}
+
+.form-checkbox label {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    user-select: none;
+}
+
+/* Search Input */
+.form-search {
+    position: relative;
+}
+
+.form-search .search-icon {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.35);
+    pointer-events: none;
+}
+
+.form-search input {
+    padding-left: 3.25rem;
+}
+
+/* Form Validation States */
+.form-input.error,
+.form-textarea.error,
+.form-select.error {
+    border-color: rgba(239, 68, 68, 0.55);
+}
+
+.form-input.success,
+.form-textarea.success,
+.form-select.success {
+    border-color: rgba(16, 185, 129, 0.55);
+}
+
+.form-error-message {
+    font-size: 0.75rem;
+    color: #ef4444;
+    margin-top: 0.5rem;
+    margin-left: 1.25rem;
+}
+
+.form-success-message {
+    font-size: 0.75rem;
+    color: #10b981;
+    margin-top: 0.5rem;
+    margin-left: 1.25rem;
+}
+
+/* Form Hint */
+.form-hint {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.25);
+    margin-top: 0.5rem;
+    margin-left: 1.25rem;
+}
+
+/* Disabled State */
+.form-input:disabled,
+.form-textarea:disabled,
+.form-select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Read Only State */
+.form-input[readonly],
+.form-textarea[readonly] {
+    background: rgba(255, 255, 255, 0.02);
+    cursor: default;
+}
+
+/* Form Inline */
+.form-inline {
+    display: flex;
+    gap: 1rem;
+    align-items: end;
+}
+
+@media (max-width: 640px) {
+    .form-inline {
+        flex-direction: column;
+    }
+}
+
+/* Newsletter Form */
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.newsletter-form input {
+    flex: 1;
+}
+
+.newsletter-form button {
+    flex-shrink: 0;
+}
+
+/* File Input */
+.form-file {
+    position: relative;
+}
+
+.form-file input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.form-file-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.form-file:hover .form-file-label {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* Custom Range Slider */
+.form-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+
+.form-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.form-range::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.form-range::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.form-range::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Focus Visible for all form elements */
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.form-select:focus-visible,
+.form-checkbox input:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.3);
+    outline-offset: 2px;
+}

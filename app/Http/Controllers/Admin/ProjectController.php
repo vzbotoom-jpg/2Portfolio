@@ -16,11 +16,11 @@ class ProjectController extends Controller
     /**
      * Create a new controller instance.
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('admin');
-    }
+   // public function __construct()
+   // {
+   //     $this->middleware('auth');
+   //     $this->middleware('admin');
+   //}
 
     /**
      * Display a listing of the projects.
@@ -104,8 +104,9 @@ class ProjectController extends Controller
     {
         $categories = $this->getCategories();
         $technologies = $this->getTechnologies();
-        
-        return view('admin.projects.create', compact('categories', 'technologies'));
+        $skills = \App\Models\Skill::ordered()->get();
+
+        return view('admin.projects.create', compact('categories', 'technologies', 'skills'));
     }
 
     /**
@@ -148,6 +149,16 @@ class ProjectController extends Controller
 
             // Create project
             $project = Project::create($validated);
+
+            if ($request->has('skills')) {
+                $selectedSkills = collect($request->input('skills', []))->filter(fn ($skillId) => !empty($skillId));
+
+                $project->skills()->sync(
+                    $selectedSkills->mapWithKeys(fn ($skillId) => [
+                        (int) $skillId => ['relevance_level' => (int) ($request->input('skill_relevance.' . $skillId) ?: 50)],
+                    ])->all()
+                );
+            }
 
             // Log activity
             activity()
@@ -193,8 +204,9 @@ class ProjectController extends Controller
     {
         $categories = $this->getCategories();
         $technologies = $this->getTechnologies();
-        
-        return view('admin.projects.edit', compact('project', 'categories', 'technologies'));
+        $skills = \App\Models\Skill::ordered()->get();
+
+        return view('admin.projects.edit', compact('project', 'categories', 'technologies', 'skills'));
     }
 
     /**
@@ -242,6 +254,18 @@ class ProjectController extends Controller
 
             // Update project
             $project->update($validated);
+
+            if ($request->has('skills')) {
+                $selectedSkills = collect($request->input('skills', []))->filter(fn ($skillId) => !empty($skillId));
+
+                $project->skills()->sync(
+                    $selectedSkills->mapWithKeys(fn ($skillId) => [
+                        (int) $skillId => ['relevance_level' => (int) ($request->input('skill_relevance.' . $skillId) ?: 50)],
+                    ])->all()
+                );
+            } else {
+                $project->skills()->detach();
+            }
 
             // Log activity
             activity()
@@ -506,6 +530,10 @@ class ProjectController extends Controller
             ],
             'technologies' => 'nullable|array',
             'technologies.*' => 'string|max:50',
+            'skills' => 'nullable|array',
+            'skills.*' => 'nullable|integer|exists:skills,id',
+            'skill_relevance' => 'nullable|array',
+            'skill_relevance.*' => 'nullable|integer|min:0|max:100',
             'live_url' => 'nullable|url|max:255',
             'github_url' => 'nullable|url|max:255',
             'client' => 'nullable|string|max:255',

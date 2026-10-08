@@ -48,7 +48,7 @@
     $testimonials = !empty($testimonials) ? $testimonials : $defaultTestimonials;
 @endphp
 
-<section class="py-24 lg:py-32 px-6 lg:px-16 bg-black relative overflow-hidden">
+<section id="testimonials" class="py-24 lg:py-32 px-6 lg:px-16 bg-black relative overflow-hidden">
     
     {{-- Background Decoration --}}
     <div class="absolute inset-0 opacity-[0.02]">

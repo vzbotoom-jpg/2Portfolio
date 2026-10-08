@@ -37,7 +37,6 @@ Route::prefix('contact')->name('contact.')->group(function () {
 });
 
 // Services Page
-Route::get('/services', [PortfolioController::class, 'services'])->name('services');
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 

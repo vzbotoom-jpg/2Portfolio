@@ -21,6 +21,7 @@
                 ['label' => 'Projects', 'url' => route('projects.index')],
                 ['label' => 'About', 'url' => route('about')],
                 ['label' => 'Services', 'url' => route('services')],
+                ['label' => 'Testimonials', 'url' => route('home') . '#testimonials'],
                 ['label' => 'Contact', 'url' => route('contact.index')],
             ]
         ],
@@ -39,6 +40,8 @@
                 ['label' => 'GitHub', 'url' => 'https://github.com/yourusername'],
                 ['label' => 'LinkedIn', 'url' => 'https://linkedin.com/in/yourusername'],
                 ['label' => 'Twitter', 'url' => 'https://twitter.com/yourusername'],
+                ['label' => 'Dribbble', 'url' => 'https://dribbble.com/yourusername'],
+                ['label' => 'Instagram', 'url' => 'https://instagram.com/yourusername'],
                 ['label' => 'Email', 'url' => 'mailto:hello@yourdomain.com'],
             ]
         ],

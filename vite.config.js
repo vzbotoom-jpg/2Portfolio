@@ -76,11 +76,10 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 // Manual chunks for better caching
-                manualChunks: {
-                    // Vendor chunks
-                    'vendor': [
-                        'alpinejs',
-                    ],
+                manualChunks(id) {
+                    if (id.includes('node_modules/alpinejs')) {
+                        return 'vendor';
+                    }
                 },
             },
         },

@@ -52,17 +52,6 @@ return new class extends Migration
             $table->index('sort_order');
             $table->index('completed_at');
         });
-        
-        // Pivot table for project-skill relationship
-        Schema::create('project_skill', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('project_id')->constrained()->onDelete('cascade');
-            $table->foreignId('skill_id')->constrained()->onDelete('cascade');
-            $table->integer('relevance_level')->default(50); // 0-100
-            $table->timestamps();
-            
-            $table->unique(['project_id', 'skill_id']);
-        });
     }
 
     /**
@@ -70,7 +59,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('project_skill');
         Schema::dropIfExists('projects');
     }
 };

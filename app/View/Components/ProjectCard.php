@@ -122,7 +122,7 @@ class ProjectCard extends Component
     public function getProjectUrl()
     {
         if (isset($this->project->slug)) {
-            return route('project.detail', $this->project->slug);
+            return route('projects.show', $this->project->slug);
         }
 
         return '#';

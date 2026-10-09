@@ -21,7 +21,7 @@
                 ['label' => 'Projects', 'url' => route('projects.index')],
                 ['label' => 'About', 'url' => route('about')],
                 ['label' => 'Services', 'url' => route('services')],
-                ['label' => 'Testimonials', 'url' => route('home') . '#testimonials'],
+                ['label' => 'Testimonials', 'url' => route('testimonials')],
                 ['label' => 'Contact', 'url' => route('contact.index')],
             ]
         ],

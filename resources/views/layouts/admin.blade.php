@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('page_title', 'Dashboard') - Admin Panel</title>
     
-    @vite(['resources/css/app.css', 'resources/css/admin.css'])
+    @vite(['resources/css/app.css', 'resources/css/admin.css', 'resources/js/app.js'])
     
     @stack('styles')
 </head>
@@ -68,7 +68,8 @@
             </div>
         </div>
     </div>
-    
+
+    @include('components.ui.logout-modal')
     @stack('scripts')
 </body>
 </html>

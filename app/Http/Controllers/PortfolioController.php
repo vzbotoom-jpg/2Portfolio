@@ -738,6 +738,71 @@ class PortfolioController extends Controller
     }
 
     /**
+     * Display testimonials page.
+     */
+    public function testimonials()
+    {
+        $testimonials = collect();
+
+        try {
+            $testimonials = Testimonial::where('is_active', true)
+                ->orderBy('sort_order')
+                ->get();
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch testimonials: ' . $e->getMessage());
+        }
+
+        if ($testimonials->isEmpty()) {
+            $testimonials = collect([
+                [
+                    'name' => 'John Doe',
+                    'position' => 'CEO, TechCorp',
+                    'company' => 'TechCorp Inc.',
+                    'content' => 'Outstanding work! Delivered beyond our expectations. The attention to detail and technical expertise were impressive.',
+                    'rating' => 5,
+                    'avatar' => null,
+                    'project_name' => 'E-Commerce Platform',
+                ],
+                [
+                    'name' => 'Jane Smith',
+                    'position' => 'CTO, StartupX',
+                    'company' => 'StartupX',
+                    'content' => 'Exceptional developer with great attention to detail. Delivered on time and exceeded our expectations.',
+                    'rating' => 5,
+                    'avatar' => null,
+                    'project_name' => 'Mobile Banking App',
+                ],
+                [
+                    'name' => 'Mike Johnson',
+                    'position' => 'Founder, DigitalPro',
+                    'company' => 'DigitalPro',
+                    'content' => 'Incredible technical skills combined with creative problem-solving. Highly recommended!',
+                    'rating' => 5,
+                    'avatar' => null,
+                    'project_name' => 'AI Analytics Dashboard',
+                ],
+                [
+                    'name' => 'Sarah Williams',
+                    'position' => 'Product Manager, InnovateLabs',
+                    'company' => 'InnovateLabs',
+                    'content' => 'One of the best developers I\'ve worked with. Deep understanding of modern web technologies.',
+                    'rating' => 5,
+                    'avatar' => null,
+                    'project_name' => 'Healthcare Platform',
+                ],
+            ])->map(fn ($item) => (object) $item);
+        }
+
+        $seoData = [
+            'title' => 'Testimonials - Client Reviews',
+            'description' => 'Read what clients say about working with me. Real testimonials from real projects.',
+            'keywords' => 'testimonials, client reviews, feedback, portfolio',
+        ];
+
+        return view('pages.testimonials', compact('testimonials', 'seoData'));
+    }
+
+    /**
      * Handle contact form submission.
      */
     public function submitContact(Request $request)

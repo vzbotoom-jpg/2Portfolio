@@ -30,6 +30,9 @@ Route::prefix('projects')->name('projects.')->group(function () {
 // About Page
 Route::get('/about', [PortfolioController::class, 'about'])->name('about');
 
+// Testimonials Page
+Route::get('/testimonials', [PortfolioController::class, 'testimonials'])->name('testimonials');
+
 // Contact Routes
 Route::prefix('contact')->name('contact.')->group(function () {
     Route::get('/', [PortfolioController::class, 'contact'])->name('index');
@@ -39,6 +42,7 @@ Route::prefix('contact')->name('contact.')->group(function () {
 // Services Page
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
+
 
 // Resume Download
 Route::get('/download-resume', [PortfolioController::class, 'downloadResume'])->name('download.resume');

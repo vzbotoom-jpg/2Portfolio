@@ -11,6 +11,9 @@ use App\Models\User;
 use App\View\Components\ProjectCard;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class PageSmokeTest extends TestCase
@@ -66,6 +69,49 @@ class PageSmokeTest extends TestCase
             'email' => 'smoke@example.test',
             'subject' => 'Test inquiry',
         ]);
+    }
+
+    public function test_testimonials_page_displays_active_testimonials_in_sort_order(): void
+    {
+        Testimonial::create([
+            'name' => 'Later Client',
+            'position' => 'Founder',
+            'content' => 'This testimonial appears later.',
+            'sort_order' => 2,
+        ]);
+        Testimonial::create([
+            'name' => 'Inactive Client',
+            'position' => 'Manager',
+            'content' => 'This testimonial is inactive.',
+            'is_active' => false,
+            'sort_order' => 1,
+        ]);
+        Testimonial::create([
+            'name' => 'Earlier Client',
+            'position' => 'Director',
+            'content' => 'This testimonial appears first.',
+            'sort_order' => 1,
+        ]);
+
+        $this->get(route('testimonials'))
+            ->assertOk()
+            ->assertSeeInOrder(['Earlier Client', 'Later Client'])
+            ->assertDontSee('Inactive Client');
+    }
+
+    public function test_testimonials_page_uses_fallback_when_no_active_testimonials_exist(): void
+    {
+        Testimonial::create([
+            'name' => 'Inactive Client',
+            'position' => 'Manager',
+            'content' => 'This testimonial is inactive.',
+            'is_active' => false,
+        ]);
+
+        $this->get(route('testimonials'))
+            ->assertOk()
+            ->assertSee('John Doe')
+            ->assertSee('Healthcare Platform');
     }
 
     public function test_project_card_uses_the_registered_project_detail_route(): void
@@ -131,5 +177,59 @@ class PageSmokeTest extends TestCase
         ] as $url) {
             $this->get($url)->assertOk();
         }
+    }
+
+    public function test_admin_layout_renders_logout_modal_and_trigger(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.dashboard'))
+            ->assertOk()
+            ->assertSee('data-logout-trigger', false)
+            ->assertSee('method="POST"', false)
+            ->assertSee('CONFIRM LOGOUT')
+            ->assertSee(route('logout'));
+    }
+
+    public function test_logout_ends_the_authenticated_session_and_redirects_to_login(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+
+        $this->actingAs($admin)
+            ->post(route('logout'))
+            ->assertRedirect(route('login'));
+
+        $this->assertGuest();
+
+        $this->get(route('admin.dashboard'))
+            ->assertRedirect(route('login'));
+    }
+
+    public function test_admin_can_create_a_project_and_log_the_activity(): void
+    {
+        Storage::fake('public');
+        Log::spy();
+
+        $admin = User::factory()->create(['is_admin' => true]);
+
+        $this->actingAs($admin)
+            ->post(route('admin.projects.store'), [
+                'title' => 'Activity log project',
+                'category' => 'Test',
+                'description' => 'A project used to test admin creation.',
+                'image' => UploadedFile::fake()->image('project.jpg'),
+            ])
+            ->assertRedirect(route('admin.projects.index'));
+
+        $project = Project::where('title', 'Activity log project')->firstOrFail();
+
+        Log::shouldHaveReceived('info')
+            ->once()
+            ->with('Created new project', [
+                'project_id' => $project->id,
+                'title' => $project->title,
+                'user_id' => $admin->id,
+            ]);
     }
 }

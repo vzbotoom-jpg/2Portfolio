@@ -1,0 +1,535 @@
+/* resources/css/login.css */
+@import 'tailwindcss';
+/* ============================================ */
+/* LOGIN PAGE — Split Screen Layout             */
+/* ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ============================================ */
+/* LAYOUT — Split Screen                        */
+/* ============================================ */
+
+.login-wrapper {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ============================================ */
+/* LEFT PANEL — Hero / Branding                 */
+/* ============================================ */
+
+.login-hero {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 5rem;
+    overflow: hidden;
+    background: #000000;
+}
+
+/* Rocket Background Image */
+.login-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('/images/login/rocket-launch.webp') center center / cover no-repeat;
+    opacity: 0.6;
+    z-index: 0;
+}
+
+/* Gradient Overlay */
+.login-hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.3) 40%,
+        rgba(0, 0, 0, 0.5) 100%
+    );
+}
+
+/* Subtle Grid Pattern */
+.login-hero-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 80px 80px;
+    z-index: 1;
+}
+
+/* Hero Content */
+.login-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+}
+
+/* CMS Logo (Left Side) */
+.login-hero-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 4rem;
+}
+
+.login-hero-logo-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.login-hero-logo-text {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: #ffffff;
+}
+
+/* Hero Tagline */
+.login-hero-title {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.login-hero-title span {
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.6) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Divider Line */
+.login-hero-divider {
+    width: 48px;
+    height: 2px;
+    background: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+/* Hero Description */
+.login-hero-description {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 400px;
+}
+
+/* ============================================ */
+/* RIGHT PANEL — Login Form                     */
+/* ============================================ */
+
+.login-form-panel {
+    width: 520px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    background: #0a0a0a;
+    position: relative;
+    z-index: 10;
+}
+
+/* Glassmorphism Card */
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 2.5rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Card Logo */
+.login-card-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.login-card-logo-icon {
+    width: 36px;
+    height: 36px;
+}
+
+.login-card-logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: #ffffff;
+}
+
+/* Card Heading */
+.login-card-heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.login-card-subheading {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+/* ============================================ */
+/* FORM FIELDS                                  */
+/* ============================================ */
+
+.form-field {
+    margin-bottom: 1.25rem;
+}
+
+.form-field-label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.form-field-input-wrapper {
+    position: relative;
+}
+
+.form-field-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+}
+
+.form-field-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.875rem 1rem 0.875rem 2.75rem;
+    color: #ffffff;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-field-input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.form-field-input:focus {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+}
+
+.form-field-input:hover:not(:focus) {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Password Toggle */
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.password-toggle svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ============================================ */
+/* REMEMBER ME                                  */
+/* ============================================ */
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.remember-me input[type="checkbox"]:checked {
+    background: #ffffff;
+    border-color: #ffffff;
+}
+
+.remember-me input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 4px;
+    height: 7px;
+    border: solid #000000;
+    border-width: 0 1.5px 1.5px 0;
+}
+
+.remember-me label {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    user-select: none;
+    cursor: pointer;
+}
+
+/* ============================================ */
+/* BUTTONS                                      */
+/* ============================================ */
+
+.btn-login {
+    width: 100%;
+    padding: 0.9375rem;
+    background: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn-login:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+.btn-login:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-login svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.btn-login:hover svg {
+    transform: translateX(3px);
+}
+
+/* Divider */
+.login-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.login-divider-text {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Google Button */
+.btn-google {
+    width: 100%;
+    padding: 0.875rem;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn-google:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-google svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Footer */
+.login-footer {
+    text-align: center;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.login-footer a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.login-footer a:hover {
+    color: #ffffff;
+}
+
+/* ============================================ */
+/* ERROR MESSAGES                               */
+/* ============================================ */
+
+.login-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    color: #ef4444;
+}
+
+.login-error ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.login-error li {
+    padding: 0.125rem 0;
+}
+
+/* ============================================ */
+/* RESPONSIVE                                   */
+/* ============================================ */
+
+@media (max-width: 1024px) {
+    .login-hero {
+        display: none;
+    }
+    
+    .login-form-panel {
+        width: 100%;
+        min-height: 100vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-form-panel {
+        padding: 1.5rem;
+    }
+    
+    .login-card {
+        padding: 1.75rem;
+    }
+}
+
+/* ============================================ */
+/* ANIMATIONS                                   */
+/* ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.login-hero-content {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Loading spinner */
+.btn-login .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-top-color: #000000;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

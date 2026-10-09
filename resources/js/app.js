@@ -14,6 +14,19 @@ Alpine.plugin(focus);
 window.Alpine = Alpine;
 Alpine.start();
 
+document.addEventListener('submit', event => {
+    if (!(event.target instanceof HTMLFormElement) || !event.target.matches('[data-logout-trigger]')) {
+        return;
+    }
+
+    if (!window.Alpine || !document.querySelector('[data-logout-modal]')) {
+        return;
+    }
+
+    event.preventDefault();
+    window.dispatchEvent(new CustomEvent('open-logout-modal'));
+});
+
 /**
  * Main Application Initialization
  */

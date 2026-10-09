@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -160,12 +161,11 @@ class ProjectController extends Controller
                 );
             }
 
-            // Log activity
-            activity()
-                ->performedOn($project)
-                ->causedBy(auth()->user())
-                ->withProperties(['title' => $project->title])
-                ->log('Created new project');
+            Log::info('Created new project', [
+                'project_id' => $project->id,
+                'title' => $project->title,
+                'user_id' => auth()->id(),
+            ]);
 
             return redirect()
                 ->route('admin.projects.index')
@@ -267,12 +267,11 @@ class ProjectController extends Controller
                 $project->skills()->detach();
             }
 
-            // Log activity
-            activity()
-                ->performedOn($project)
-                ->causedBy(auth()->user())
-                ->withProperties(['title' => $project->title])
-                ->log('Updated project');
+            Log::info('Updated project', [
+                'project_id' => $project->id,
+                'title' => $project->title,
+                'user_id' => auth()->id(),
+            ]);
 
             return redirect()
                 ->route('admin.projects.index')
@@ -313,11 +312,11 @@ class ProjectController extends Controller
             // Delete project
             $project->delete();
 
-            // Log activity
-            activity()
-                ->causedBy(auth()->user())
-                ->withProperties(['title' => $title])
-                ->log('Deleted project');
+            Log::info('Deleted project', [
+                'project_id' => $project->id,
+                'title' => $title,
+                'user_id' => auth()->id(),
+            ]);
 
             return redirect()
                 ->route('admin.projects.index')

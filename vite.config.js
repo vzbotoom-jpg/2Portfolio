@@ -10,6 +10,8 @@ export default defineConfig({
             input: [
                 // CSS Files
                 'resources/css/app.css',
+                'resources/css/admin.css',
+                'resources/css/login.css',
                 'resources/css/animations.css',
                 'resources/css/typography.css',
                 'resources/css/components/buttons.css',
